@@ -1,0 +1,64 @@
+
+======================================
+ Installation instructions for Dorrie
+======================================
+
+
+Required packages:
+==================
+
+- Django
+- spin-kickstarts
+- pytz
+- sqlite
+- python-sqlite2
+- yum
+- livecd-tools
+- system-config-language
+
+If you're choosing MySQL, replace the sqlite dependencies with the MySQL ones:
+
+- mysql
+- mysql-server
+- mysql-admin
+- MySQL-python
+
+
+How to Install:
+===============
+
+0. Change to dorrie directory::
+
+    $ cd dorrie
+
+1. For SQLite you should be set with the default settings (only the
+   ``DATABASE_NAME`` should be needed). For mysql define the mysql username and
+   password in ``settings.py``::
+
+    DATABASE_USER = 'username'
+    DATABASE_PASSWORD = 'password'
+    DATABASE_HOST = ''
+    DATABASE_PORT = ''
+
+Leave the host and port empty id the database is at the same mechine as the
+application.
+
+2. Set ``CACHE`` to a directory writable by the user running the application.
+
+3. Create the required table structure in the database::
+
+    $ python manage.py syncdb
+
+How to run Dorrie
+=================
+Before running server you have to make sure SELinux is enabled in your system.
+
+Always run server as super user.
+
+To run it as local instance, execute something like the following::
+
+    $ python manage.py runserver 0.0.0.0:8000
+
+To run this project under Apache, refer to the `Django Deployment Documentation`_.
+
+.. _Django Deployment Documentation: http://www.djangobook.com/en/1.0/chapter20/

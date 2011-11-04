@@ -1,0 +1,99 @@
+2010-09-22 Praveen Kumar <kumarpraveen.nitdgp@gmail.com>
+	
+	* INSTALL: Added new dependency.Add requirements
+	
+	* dorrie/settings.py (COMPS_URL) : Change Default value
+	
+	* dorrie/coms/parse.py (livecd_command) : Remove sudo from cmd variable
+	
+2010-06-25 Shreyank Gupta <sgupta@redhat.com>
+
+	* .gitignore: New file.
+
+	* INSTALL: Added new dependency. Removed APP_ROOT config.
+
+	* dorrie/comps/media/cache: Removed.
+
+	* dorrie/comps/parse.py (build_ks): Empty REPO, tmp check.
+
+	* dorrie/settimgs.py (CACHE): Default value /tmp
+
+2010-04-13 Shreyank Gupta <sgupta@redhat.com>
+
+	* dorrie/comps/media/dorrie.fedora.css,
+	dorrie/comps/media/fedora.css: Style changes.
+
+	* /dorrie/comps/parse.py (livecd_command): Testing option
+	(livecd_create): use get_log.
+	(get_tail): return JSON object instead of string.
+	(analyze_log, get_log): New functions.
+
+	* dorrie/comps/templates/build.html: Progress bar + rearrengements.
+
+	* dorrie/settings.py (TESTING): New setting for testing.
+
+	
+2010-02-23 Shreyank Gupta <sgupta@redhat.com>
+	
+	* dorrie/comps/media/fedora.css (#packages, #package-list): Width, border.
+
+	* dorrie/comps/models.py (Spin): Added attribute pid.
+
+	* dorrie/comps/parse.py (livecd_comand, livecd_create, get_tail): New
+	functions. 
+
+	* dorrie/comps/templates/build.html: Added JS Block, new div and build
+	spin link.
+
+	* dorrie/comps/views.py (process, tail): New views.
+
+	* dorrie/urls.py: URLs for new views.
+
+2009-12-17 Hiemanshu Sharma <hiemanshu@fedoraproject.org>
+
+	* base.html - Moved to new Template
+	* dorrie.jpg - Updated with new logo send by Shreyank
+	* dorrie.fedora.css - Added new css file to leave fedora.css untouched
+
+2009-12-10 Shreyank Gupta <sgupta@redhat.com>
+
+	* dorrie/ : Moved the Django project to dorrie folder
+
+2009-12-10 Shreyank Gupta <sgupta@redhat.com>
+
+    * comps/parse.py (build_ks): Repo, Include and Part hacks.
+
+2009-12-5 Dimitris Glezos <mits@cat.ix>
+
+Settings and docs:
+
+- Fix ReST syntax
+- SQLite is now the default instead of mysql
+- Auto-define APP_DIR to avoid asking the user to do it.
+
+Imports:
+
+- Import things by priority (python bits, external deps, django core,
+  django-contrib, other dorrie apps, current app) and then alphabetically.
+- Keep namespaces in imports (avoid importing too many things from the same
+	module -- just import the module and reference them with a prefix.)
+
+Various:
+
+- Used help_text in model fields
+- Concatenage
+- Import django's settings from djago.conf.settings and keep namespace.
+
+Shreyank Gupta <sgupta@redhat.com>
+
+    * comps/parse.py (make_repo): New method.
+	  (build_ks): Change rawhide repo to the local, fix symlink
+
+Hiemanshu <hiemanshu@fedoraproject.org>
+	
+	* mckup/* : Mockup for new look.
+
+
+2009-11-26 Shreyank Gupta<sgupta@redhat.com>
+
+	* : Initial Push.
