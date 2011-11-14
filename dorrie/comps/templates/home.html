@@ -20,10 +20,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Welcome to Dorrie</h1>
-<p>Dorrie will let you choose from one of the existing Fedora Spin templates
-and make your own spin/remix. It will have very minimal reafures for now but
-is expected to grow fast.</p>
+<h1>Welcome to the RIT Fedora Remixerator</h1>
+<p>(Brought to you by Dorrie)</p>
+<p>Create your own RIT Fedora Remix in three easy steps!<br> 
+1) Choose a base spin.<br>
+2) Select your apps.<br>
+3) Create!</p>
 <br />
 <form method="POST" action="/basic/">
     {{ form.as_p }}

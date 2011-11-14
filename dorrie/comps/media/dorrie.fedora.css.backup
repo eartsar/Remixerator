@@ -29,7 +29,7 @@ a:link, a:visited, a:active,
 
 #head
 {
-	background-color: #513127;
+	background-color: #337ACC;
 	border: 0;
 	height: 50px;
         margin-top: 20px;
