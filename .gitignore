@@ -4,3 +4,4 @@
 comps*.xml
 dorrie/comps/media/cache
 *.log
+*~
