@@ -27,7 +27,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 2) Select your apps.<br>
 3) Create!</p>
 <br />
-<form method="POST" action="/basic/">
+<form method="POST" action="/packages/">
+    <input type="hidden" name="spin_id" value="{{ spin.id }}"
     {{ form.as_p }}
     <input type="submit" value="Next" />
 

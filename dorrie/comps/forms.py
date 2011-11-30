@@ -22,6 +22,8 @@ class NameForm(forms.Form):
     """
     Name and template
     """
+    select_language = forms.ChoiceField(choices=languages(), initial='en_US')
+    select_timezone = forms.ChoiceField(choices=timezones())
     name_of_the_spin = forms.CharField()
     based_on = forms.ChoiceField(choices=ls_ks())
 

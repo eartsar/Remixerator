@@ -32,7 +32,7 @@ urlpatterns = patterns('',
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     (r'^$', views.home),
-    (r'^basic/$', views.basic),
+    # (r'^basic/$', views.basic),
     (r'^packages/$', views.packages),
     (r'^select/$', views.select),
     (r'^build/$', views.build),

@@ -27,30 +27,28 @@ from parse import (get_lang_tz, get_comps, default_selected,
 
 def home(request):
     """
-    homepage: enter name+baseks
+    Get the name, base spin, and time defaults
     """
-    form = NameForm()
+    # Set the defaults of the field.
+    defaults = {'name_of_the_spin': 'RIT_Remix', \
+                'based_on': 'fedora-live-desktop.ks', \
+                'select_timezone': 'America/New_York'}
+    form = NameForm(initial= defaults)
     return render_to_response('home.html', {'form': form})
-
-
-def basic(request):
-    """
-    select template
-    """
-    name = request.POST.get('name_of_the_spin')
-    base_ks = request.POST.get('based_on')
-    spin = new_spin(name, base_ks)
-    defaults = get_lang_tz(base_ks)
-    form = BasicForm(initial=defaults)
-    return render_to_response('basic.html', {'form': form,
-        'spin': spin})
 
 
 def packages(request):
     """
     Select packages and groups
     """
-    spin_id = request.POST.get('spin_id')
+    
+    # Create the spin object here.
+    # Some thought the secondary "basic" form  was annoying, so I got rid of it.
+    name = request.POST.get('name_of_the_spin')
+    base_ks = request.POST.get('based_on')
+    spin = new_spin(name, base_ks)
+    
+    spin_id = spin.id
     language = request.POST.get('select_language')
     timezone = request.POST.get('select_timezone')
     spin = add_lang_tz(spin_id, language, timezone)
