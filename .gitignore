@@ -5,3 +5,4 @@ comps*.xml
 dorrie/comps/media/cache
 *.log
 *~
+dorrie/comps/old/

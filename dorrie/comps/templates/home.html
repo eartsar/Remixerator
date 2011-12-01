@@ -20,13 +20,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 {% extends "base.html" %}
 
 {% block content %}
+<div id="steps"> 
 <h1>Welcome to the RIT Fedora Remixerator</h1>
 <p>(Brought to you by Dorrie)</p>
 <p>Create your own RIT Fedora Remix in three easy steps!<br> 
-1) Choose a base spin.<br>
+1) Choose a base spin. <br>
 2) Select your apps.<br>
 3) Create!</p>
 <br />
+</div>
+
+<script>
+$("#steps href[title]").tooltip();
+</script>
+
 <form method="POST" action="/packages/">
     <input type="hidden" name="spin_id" value="{{ spin.id }}"
     {{ form.as_p }}
