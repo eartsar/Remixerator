@@ -527,6 +527,13 @@ a
 	text-decoration: none;
 }
 
+.helptip
+{
+    color: grey;
+    border-bottom: 3px double;
+    line-height: 1.7em;
+}
+
 .footnote
 {
 	font-style: italic;
@@ -590,5 +597,4 @@ a
     font-size:15px;
     margin:0 0 -10px 0;
 }
-
 /* end: used for picture overlay */
