@@ -30,16 +30,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  <script type="text/javascript"
  src="/static/jquery/js/jquery-ui-1.7.2.custom.min.js"></script>
 <script src="/static/jquery/js/jquery.tools.min.js"></script>
-<!-- We'll put our custom style here later.<style>
+<script>
+$(document).ready(function() {
+$("a[title]").tooltip({ effect: 'fade'});
+});
+</script>
+<style>
 .tooltip {
-	display:none;
+        display:none;
+	background: url(/static/images/fedarrowbig.png);
+	height:145px;
+	padding:30px 30px 10px 30px;
+	width:270px;
 	font-size:12px;
-	height:70px;
-	width:160px;
-	padding:25px;
-	color:#fff;	
 }
-</style>-->
+</style>
 
     <!--[if lt IE 7]>
     <style type="text/css">
