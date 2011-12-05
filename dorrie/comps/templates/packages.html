@@ -101,7 +101,7 @@ function chkbox(value, type) {
     <div id="accordion">
     {% for cat in cats %}
     <!--TODO: Add in a new class for accordion tooltip tyles since double underline looks like crap. Also, if the description in the Comps xml isn't sufficient, we can mirror our own with better descriptions, or make a desciption add-on somewhere.-->
-        <h4><a href="#" class="helptip" title="{{cat.description}}">{{ cat.name }}</a></h4>
+        <h4><a href="#" title="{{cat.description}}">{{ cat.name }}</a></h4>
         <div>
         {% for group in cat.groups %}
             <input type="checkbox" id="grp_{{ group }}" value="{{ group }}"
