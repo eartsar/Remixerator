@@ -308,6 +308,9 @@ class Category(CompsObj):
 
             elif child.tag == '_name':
                 text = child.text
+                # Eitan self-note
+                # Here is where we get the category names.
+                # Tooltip adding should be done here
                 if text:
                     text = text.encode('utf8')
                     

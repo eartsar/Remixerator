@@ -36,6 +36,8 @@ def get_comps():
     """
     parse and return comps object
     """
+    # Eitan self-note:
+    # Grabs the xml file from comps repository. Check settings for location.
     fd = urllib.urlopen(settings.COMPS_URL)
     c = Comps()
     c.add(fd)
