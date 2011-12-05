@@ -673,7 +673,7 @@ a.cvs {
 }
 
 /* tooltip */
-.tooltip {
+.tooltippy {
   display: block;
   position: absolute;
   border: 1px solid black;
