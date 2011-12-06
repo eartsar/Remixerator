@@ -15,6 +15,7 @@
 
 import types
 import sys
+import packagetoimage
 from yum.constants import *
 try:
     from xml.etree import cElementTree
@@ -119,6 +120,7 @@ class Group(CompsObj):
         self.display_order = 1024
         self.installed = False
         self.toremove = False
+        self.previewpath = ""
 
         if elem:
             self.parse(elem)
@@ -184,6 +186,10 @@ class Group(CompsObj):
     
             elif child.tag == 'packagelist':
                 self.parse_package_list(child)
+            
+        # here is where we grab the preview
+        self.previewpath = packagetoimage.getGroupPreview(self.groupid)
+        #print self.groupid + " :: " + self.previewpath
     
     def parse_package_list(self, packagelist_elem):
         for child in packagelist_elem:
