@@ -30,6 +30,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  <script type="text/javascript"
  src="/static/jquery/js/jquery-ui-1.7.2.custom.min.js"></script>
 <script src="/static/jquery/js/jquery.tools.min.js"></script>
+
+<!-- tooltip code-->
 <script>
 $(document).ready(function() {
 $("#steps a[title]").tooltip({ effect: 'fade', tipClass: 'tooltipBig'});
@@ -37,6 +39,50 @@ $("#accordion a[title]").tooltip({ effect: 'fade', position: 'center right', tip
 $("#group-list a[title]").tooltip({ effect: 'fade', position: 'center right', tipClass: 'tooltipBigSide'});
 });
 </script>
+
+<!--image preview code-->
+<script>
+$(document).ready(function(){	
+    // X and Y offset of preview from cursor's position
+    xadjust = 10;
+    yadjust = 30;
+    
+    // functionality for hovering over the target
+    $("a.depreview").hover(
+	function(e){
+	    link = this.href
+	    
+	    // check to see if the preview for the desktop environment exists
+	    // if not, just toss up some "no preview available" image.
+	    var http = new XMLHttpRequest();
+	    http.open('HEAD', link, false);
+	    http.send();
+	    if( http.status == 404 ) {
+		link = '/static/images/pkgimages/nopreview.png'
+	    }
+
+	    // show the image
+	    $("body").append("<div id='depreview'><img src='"+ link +"' style='width: 600px' /> </div>");
+	    
+	    // set the positioning and size in pixels
+	    $("#depreview")
+		.css("top", (e.pageY - xadjust) + "px")
+		.css("left", (e.pageX + yadjust) + "px")
+		.fadeIn("slow");						
+	},
+	function(){	
+	    $("#depreview").remove();
+	});	
+    
+    // updates the position of the preview when the mouse moves
+    $("a.depreview").mousemove(function(e){
+	$("#depreview")
+	    .css("top", (e.pageY - xadjust) + "px")
+	    .css("left", (e.pageX + yadjust) + "px");
+    });			
+});
+</script>
+
 <style>
 .tooltipBig {
         display:none;
@@ -61,6 +107,14 @@ $("#group-list a[title]").tooltip({ effect: 'fade', position: 'center right', ti
 	padding:25px 40px 20px 40px;
 	width:212px;
 	font-size:12px;
+}
+.tooltipBigSideImage {
+        display:none;
+	background: url(/static/images/fedarrowsidebig.png);
+	height:140px;
+	padding:25px 40px 20px 40px;
+	width:212px;
+	font-size:12px
 }
 </style>
 

@@ -92,26 +92,42 @@ function chkbox(value, type) {
     html += onclk;
     return html;
 }
-
 </script>
+<style>
+#depreview{
+	position:absolute;
+	border:2px solid #ddd;
+	background:#444;
+	padding:6px;
+	display:none;
+	color:#fff;
+	}
+</style>
     <div id="flash">
     </div>
     <div id="group-list">
     <h3>Select Package Groups</h3>
     <div id="accordion">
     {% for cat in cats %}
-    <!--TODO: Add in a new class for accordion tooltip tyles since double underline looks like crap. Also, if the description in the Comps xml isn't sufficient, we can mirror our own with better descriptions, or make a desciption add-on somewhere.-->
+    <!--If the description in the Comps xml isn't sufficient, we can mirror our own with better descriptions, or make a desciption add-on somewhere. While we're at it, we can stuff image references there, too.-->
         <h4><a href="#" title="{{cat.description}}">{{ cat.name }}</a></h4>
         <div>
         {% for group in cat.groups %}
-            <input type="checkbox" id="grp_{{ group }}" value="{{ group }}"
+	    <input type="checkbox" id="grp_{{ group }}" value="{{ group }}"
             {% for each in defaults %}
                 {% ifequal each group %}
                     checked
                 {% endifequal %}
             {% endfor %}
             onClick='packages("{{ group }}")' />
-            {{ group }} <br />   
+	    
+	    {% ifequal cat.name "Desktop Environments" %}
+	        <a href="/static/images/pkgimages/{{group}}.png" onclick="return false;" class="depreview">{{ group }}</a>
+	    {% else %}
+		{{ group }}
+	    {% endifequal %}
+	    
+	    <br />
         {% endfor %}
         </div>
     {% endfor %}
