@@ -16,7 +16,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from django.conf import settings
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 
 from forms import NameForm , BasicForm
@@ -46,11 +46,22 @@ def packages(request):
     # Some thought the secondary "basic" form  was annoying, so I got rid of it.
     name = request.POST.get('name_of_the_spin')
     base_ks = request.POST.get('based_on')
+    
+    # Do a simple redirect if they accidentally skipped to this page
+    if name == None or base_ks == None:
+       return HttpResponseRedirect("/")
+
+    
     spin = new_spin(name, base_ks)
     
     spin_id = spin.id
     language = request.POST.get('select_language')
     timezone = request.POST.get('select_timezone')
+
+    # These should not be none either.
+    if language == None or timezone == None:
+        return HttpResponseRedirect("/")
+    
     spin = add_lang_tz(spin_id, language, timezone)
     selected, plus, minus = default_selected(spin.baseks)
     c = get_comps()
@@ -78,6 +89,11 @@ def build(request):
     Build KS and later Image
     """
     spin_id = request.POST.get('spin_id')
+    
+    # if spin_id is None, then they accidentally skipped to this page
+    if spin_id == None:
+        return HttpResponseRedirect("/")
+    
     new_ks = build_ks(spin_id)
     spin = get_spin(spin_id)
     return render_to_response('build.html', {'ks': new_ks, 'spin': spin})
