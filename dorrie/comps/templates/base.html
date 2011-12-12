@@ -44,8 +44,8 @@ $("#group-list a[title]").tooltip({ effect: 'fade', position: 'center right', ti
 <script>
 $(document).ready(function(){	
     // X and Y offset of preview from cursor's position
-    xadjust = 10;
-    yadjust = 30;
+    xadjust = 60;
+    yadjust = 50;
     
     // functionality for hovering over the target
     $("a.depreview").hover(
@@ -63,11 +63,12 @@ $(document).ready(function(){
 
 	    // show the image
 	    $("body").append("<div id='depreview'><img src='"+ link +"' style='width: 600px' /> </div>");
-	    
+
+            ypos = $(document).scrollTop() + yadjust;
 	    // set the positioning and size in pixels
 	    $("#depreview")
-		.css("top", (e.pageY - xadjust) + "px")
-		.css("left", (e.pageX + yadjust) + "px")
+		.css("top", (ypos) + "px")
+		.css("left", (e.pageX + xadjust) + "px")
 		.fadeIn("slow");						
 	},
 	function(){	
@@ -76,9 +77,10 @@ $(document).ready(function(){
     
     // updates the position of the preview when the mouse moves
     $("a.depreview").mousemove(function(e){
+        ypos = $(document).scrollTop() + yadjust;
 	$("#depreview")
-	    .css("top", (e.pageY - xadjust) + "px")
-	    .css("left", (e.pageX + yadjust) + "px");
+	    .css("top", (ypos) + "px")
+	    .css("left", (e.pageX + xadjust) + "px");
     });			
 });
 </script>
