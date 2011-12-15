@@ -26,6 +26,11 @@ class NameForm(forms.Form):
     select_timezone = forms.ChoiceField(choices=timezones())
     name_of_the_spin = forms.CharField()
     based_on = forms.ChoiceField(choices=ls_ks())
+    
+    select_language.widget.attrs['class'] = 'forminputdropdown'
+    select_timezone.widget.attrs['class'] = 'forminputdropdown'
+    name_of_the_spin.widget.attrs['class'] = 'forminputtext'
+    based_on.widget.attrs['class'] = 'forminputdropdown'
 
 
 class BasicForm(forms.Form):
