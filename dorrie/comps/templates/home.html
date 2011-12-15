@@ -20,6 +20,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 {% extends "base.html" %}
 
 {% block content %}
+<script type="text/javascript">
+$(document).ready(function() {
+  var max = 0;
+  $("label").each(function(){
+    if ($(this).width() > max)
+    max = $(this).width();    
+  });
+  
+  $("label").each(function(){
+    x = max - $(this).width();
+    $(this).css('margin-right', (max - $(this).width()));
+  });
+});
+</script>
 <div id="steps"> 
 <h1>Welcome to the RIT Fedora Remixerator</h1>
 <p>(Brought to you by Dorrie)</p>
