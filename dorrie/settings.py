@@ -1,4 +1,4 @@
-# Dorrie - Web interface for building Fedora Spins/Remixes. 
+# Dorrie - Web interface for building Fedora Spins/Remixes
 # Copyright (C) 2009 Red Hat Inc.
 # Author: Shreyank Gupta <sgupta@redhat.com>
 
@@ -34,13 +34,16 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DATABASE_ENGINE = 'sqlite3'           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+DATABASE_ENGINE = 'sqlite3'           # 'postgresql_psycopg2', 'postgresql',
+#'mysql', 'sqlite3' or 'oracle'.
 # DB Name is path to database file if using sqlite3.
-DATABASE_NAME = os.path.join(APP_ROOT, 'dorrie.sqlite3')             
+DATABASE_NAME = os.path.join(APP_ROOT, 'dorrie.sqlite3')
 DATABASE_USER = ''             # Not used with sqlite3.
 DATABASE_PASSWORD = ''         # Not used with sqlite3.
-DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
-DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
+DATABASE_HOST = ''             # Set to empty string for localhost. Not used
+#                                with sqlite3.
+DATABASE_PORT = ''             # Set to empty string for default. Not used with
+#                                sqlite3.
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -105,6 +108,10 @@ INSTALLED_APPS = (
 
 COMPS_URL = 'http://git.fedorahosted.org/git/?p=comps.git;a=blob_plain;\
 f=comps-f16.xml.in;hb=HEAD'
+# If you are running Fedora 15, uncomment the 2 lines below, and comment
+# out the line above
+#COMPS_URL = 'http://git.fedorahosted.org/git/?p=comps.git;a=blob_plain;\
+#f=comps-f15.xml.in;hb=HEAD'
 
 KS_DIR = '/usr/share/spin-kickstarts/'
 
