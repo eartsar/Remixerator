@@ -18,6 +18,7 @@
 # Django settings for dorrie project.
 
 import os
+import subprocess
 
 # The directory of the project
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -106,8 +107,14 @@ INSTALLED_APPS = (
     'comps',
 )
 
-COMPS_URL = 'http://git.fedorahosted.org/git/?p=comps.git;a=blob_plain;\
-f=comps-f16.xml.in;hb=HEAD'
+# Get the release version of the host OS
+p = subprocess.Popen(['cat', '/etc/fedora-release'], stdout=subprocess.PIPE)
+pout = p.communicate()[0]
+RELEASE_VER = pout.split(" ")[2]
+COMPS_URL = 'http://git.fedorahosted.org/git/?p=comps.git;a=blob_plain;#f=comps-f' + RELEASE_VER + '.xml.in;hb=HEAD'
+
+#COMPS_URL = 'http://git.fedorahosted.org/git/?p=comps.git;a=blob_plain;\
+#f=comps-f16.xml.in;hb=HEAD'
 # If you are running Fedora 15, uncomment the 2 lines below, and comment
 # out the line above
 #COMPS_URL = 'http://git.fedorahosted.org/git/?p=comps.git;a=blob_plain;\
