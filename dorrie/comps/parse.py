@@ -22,6 +22,7 @@ from subprocess import Popen
 
 #FIXME: Import only what's needed or just 'from pykickstart import parser'
 from pykickstart.parser import *
+from pykickstart import contents
 from pykickstart.version import makeVersion
 
 from django.conf import settings
@@ -82,8 +83,12 @@ def kickstart(ks, path=settings.KS_DIR):
     return parsed pykickstart object
     """
     ks = "%s%s" % (path, ks)
-    ksparser = KickstartParser(makeVersion())
+    ksparser = DecoratedKickstartParser(makeVersion())
     ksparser.readKickstart(ks)
+    
+    # add the RIT stuff
+    ritPostContents = get_rit_post()
+    ksparser.addScript(ritPostContents, contents.KS_SCRIPT_POST)
     return ksparser
 
 
@@ -208,9 +213,6 @@ def build_ks(id):
             lines[lines.index(line)+1].startswith('part / '): #partition hack
                 continue
         fd.write(line)
-    ritlines = ritpost()
-    for line in ritlines:
-        fd.write(line)
     fd.close()
 
     linkname = "/static/cache/%s_%s/%s.ks" % \
@@ -321,12 +323,20 @@ def analyze_log(spin):
             return 'Making new filesystem', 5
     return None, None
 
-def ritpost():
+# Subclass the parser so we can add scripts easily to the kickstart
+class DecoratedKickstartParser(KickstartParser):
+    def addScript(script, scriptType):
+        # Make a script object
+        # add script object to self.handler.scripts
+        scriptObj = Script(script, type=scriptType)
+        self.scripts.append(scriptObj)
+
+# add the rit post script for the rit remix into the scripts list
+
+def get_rit_post():
     cwd = os.getcwd()
     ritpostpath = cwd + "/ritpost.txt"
-    lines = []
     rfile = open(ritpostpath)
-    for line in rfile:
-        lines.append(line)
+    contents = rfile.read()
     rfile.close()
-    return lines
+    return contents
