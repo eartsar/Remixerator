@@ -22,7 +22,7 @@ from subprocess import Popen
 
 #FIXME: Import only what's needed or just 'from pykickstart import parser'
 from pykickstart.parser import *
-from pykickstart import contents
+from pykickstart import constants
 from pykickstart.version import makeVersion
 
 from django.conf import settings
@@ -88,7 +88,7 @@ def kickstart(ks, path=settings.KS_DIR):
     
     # add the RIT stuff
     ritPostContents = get_rit_post()
-    ksparser.addScript(ritPostContents, contents.KS_SCRIPT_POST)
+    ksparser.addScript(ritPostContents, constants.KS_SCRIPT_POST)
     return ksparser
 
 
@@ -325,11 +325,11 @@ def analyze_log(spin):
 
 # Subclass the parser so we can add scripts easily to the kickstart
 class DecoratedKickstartParser(KickstartParser):
-    def addScript(script, scriptType):
+    def addScript(self, script, scriptType):
         # Make a script object
         # add script object to self.handler.scripts
         scriptObj = Script(script, type=scriptType)
-        self.scripts.append(scriptObj)
+        self.handler.scripts.append(scriptObj)
 
 # add the rit post script for the rit remix into the scripts list
 

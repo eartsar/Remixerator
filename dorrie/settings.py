@@ -111,7 +111,7 @@ INSTALLED_APPS = (
 p = subprocess.Popen(['cat', '/etc/fedora-release'], stdout=subprocess.PIPE)
 pout = p.communicate()[0]
 RELEASE_VER = pout.split(" ")[2]
-COMPS_URL = 'http://git.fedorahosted.org/git/?p=comps.git;a=blob_plain;#f=comps-f' + RELEASE_VER + '.xml.in;hb=HEAD'
+COMPS_URL = 'http://git.fedorahosted.org/git/?p=comps.git;a=blob_plain;f=comps-f' + RELEASE_VER + '.xml.in;hb=HEAD'
 
 #COMPS_URL = 'http://git.fedorahosted.org/git/?p=comps.git;a=blob_plain;\
 #f=comps-f16.xml.in;hb=HEAD'
