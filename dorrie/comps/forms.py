@@ -25,7 +25,13 @@ class NameForm(forms.Form):
     select_language = forms.ChoiceField(choices=languages(), initial='en_US')
     select_timezone = forms.ChoiceField(choices=timezones())
     name_of_the_spin = forms.CharField()
-    based_on = forms.ChoiceField(choices=ls_ks())
+    
+    # add a specific choice to the list of kickstarts for uploading their own
+    kschoices = ((None, 'Use your own!'),) + ls_ks()
+    based_on = forms.ChoiceField(choices=kschoices)
+    
+    # allows for the selection of a different kickstart
+    uploaded_kickstart = forms.FileField()
     
     select_language.widget.attrs['class'] = 'forminputdropdown'
     select_timezone.widget.attrs['class'] = 'forminputdropdown'

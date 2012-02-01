@@ -33,7 +33,23 @@ $(document).ready(function() {
     $(this).css('margin-right', (max - $(this).width()));
   });
 
+  $('#id_uploaded_kickstart').hide();
+  $("label[for='id_uploaded_kickstart']").hide();
   $(".forminputdropdown").css('width', 312);
+  
+  // Show the "upload file" portion if the user decides to use their own kickstart file
+  $("#id_based_on").change(
+    function() {
+      if( $('#id_based_on option:selected').text() == 'Use your own!' ) {
+        $("label[for='id_uploaded_kickstart']").show('fast');
+        $('#id_uploaded_kickstart').show('fast');
+        //This is where we unhide the upload file selection portion
+      } else {
+        $("label[for='id_uploaded_kickstart']").hide('fast');
+        $('#id_uploaded_kickstart').hide('fast');
+      }
+    }
+  );
   $(".forminputtext").css('width', 300);
 });
 </script>

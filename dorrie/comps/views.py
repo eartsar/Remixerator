@@ -29,6 +29,7 @@ def home(request):
     """
     Get the name, base spin, and time defaults
     """
+    
     # Set the defaults of the field.
     defaults = {'name_of_the_spin': 'RIT_Remix', \
                 'based_on': 'fedora-live-desktop.ks', \
@@ -41,7 +42,7 @@ def packages(request):
     """
     Select packages and groups
     """
-    
+    print str(request.FILES['uploaded_kickstart'])
     # Create the spin object here.
     # Some thought the secondary "basic" form  was annoying, so I got rid of it.
     name = request.POST.get('name_of_the_spin')
@@ -50,14 +51,12 @@ def packages(request):
     # Do a simple redirect if they accidentally skipped to this page
     if name == None or base_ks == None:
        return HttpResponseRedirect("/")
-
     
     spin = new_spin(name, base_ks)
     
     spin_id = spin.id
     language = request.POST.get('select_language')
     timezone = request.POST.get('select_timezone')
-
     # These should not be none either.
     if language == None or timezone == None:
         return HttpResponseRedirect("/")
