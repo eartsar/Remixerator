@@ -14,7 +14,8 @@
 
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
+import os
+from django.conf import settings
 from models import Spin, Group, Package
 
 def get_spin(id):
@@ -24,11 +25,11 @@ def get_spin(id):
     return Spin.objects.get(id=id)
 
 
-def new_spin(name, base_ks):
+def new_spin(name, base_ks, uploaded):
     """
     Return new spin
     """
-    spin = Spin(name=name, baseks=base_ks)
+    spin = Spin(name=name, baseks=base_ks, uploaded=uploaded)
     spin.save()
     return spin
 
@@ -135,3 +136,11 @@ def select_helper(spin_id, type, action, string):
         return add_rem_groups(spin, action, string)
     else:
         return None
+
+def handle_uploaded_ks(uploaded_ks):
+    ks_path = os.path.join(settings.MEDIA_ROOT, uploaded_ks._name)
+    print ks_path
+    destination = open(ks_path, 'wb+')
+    for chunk in uploaded_ks.chunks():
+        destination.write(chunk)
+    destination.close()

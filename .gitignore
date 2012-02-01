@@ -6,3 +6,4 @@ dorrie/comps/media/cache
 *.log
 *~
 dorrie/comps/old/
+*.ks

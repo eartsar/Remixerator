@@ -20,9 +20,11 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 
 from forms import NameForm , BasicForm
-from helper import new_spin, add_lang_tz, select_helper, get_spin
+from helper import new_spin, add_lang_tz, select_helper, get_spin, handle_uploaded_ks
 from parse import (get_lang_tz, get_comps, default_selected,
      package_listing, build_ks, livecd_create, get_tail)
+
+import os
 
 
 def home(request):
@@ -42,7 +44,10 @@ def packages(request):
     """
     Select packages and groups
     """
-    print str(request.FILES['uploaded_kickstart'])
+    # if the user is uploading their own kickstart file, toss it in a cache
+    if request.FILES:
+        handle_uploaded_ks(request.FILES['uploaded_kickstart'])
+    
     # Create the spin object here.
     # Some thought the secondary "basic" form  was annoying, so I got rid of it.
     name = request.POST.get('name_of_the_spin')
@@ -50,9 +55,14 @@ def packages(request):
     
     # Do a simple redirect if they accidentally skipped to this page
     if name == None or base_ks == None:
-       return HttpResponseRedirect("/")
+        return HttpResponseRedirect("/")
     
-    spin = new_spin(name, base_ks)
+    # if we hit this, it's because they uploaded their own kickstart file
+    uploaded = False
+    if base_ks == 'None':
+        base_ks = os.path.join(settings.MEDIA_ROOT, request.FILES['uploaded_kickstart']._name)
+        uploaded = True
+    spin = new_spin(name, base_ks, uploaded)
     
     spin_id = spin.id
     language = request.POST.get('select_language')
@@ -60,9 +70,10 @@ def packages(request):
     # These should not be none either.
     if language == None or timezone == None:
         return HttpResponseRedirect("/")
-    
+    print spin.uploaded
     spin = add_lang_tz(spin_id, language, timezone)
-    selected, plus, minus = default_selected(spin.baseks)
+    print spin.uploaded    
+    selected, plus, minus = default_selected(spin.baseks, spin.uploaded)
     c = get_comps()
     groups = package_listing(c)
     categories = c.get_categories()

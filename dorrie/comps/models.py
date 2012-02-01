@@ -31,6 +31,7 @@ class Spin(models.Model):
     pplus = models.ManyToManyField('Package', related_name='pplus_set')
     pminus = models.ManyToManyField('Package', related_name='pminus_set')
     pid = models.IntegerField(default=0)
+    uploaded = models.BooleanField()
 
 
 class Group(models.Model):
