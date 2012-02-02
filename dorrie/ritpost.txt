@@ -1,5 +1,3 @@
-%post
-
 # This will remove duplicate omni.jar archives created from previous builds
 rm -rf /tmp/firefox-omni
 
@@ -123,5 +121,3 @@ su -c "chmod a+rwx enablerpmfusion.sh"
 
 su -c "cp FusionEnableLauncher.py /usr/share/autostart/FusionEnableLauncher.py"
 su -c "cp enablerpmfusion.sh /usr/share/autostart/enablerpmfusion.sh"
-
-%end
