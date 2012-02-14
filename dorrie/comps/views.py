@@ -33,7 +33,7 @@ def home(request):
     """
     
     # Set the defaults of the field.
-    defaults = {'name_of_the_spin': 'RIT_Remix', \
+    defaults = {'name_of_the_spin': 'My Remix', \
                 'based_on': 'fedora-live-desktop.ks', \
                 'select_timezone': 'America/New_York'}
     form = NameForm(initial= defaults)

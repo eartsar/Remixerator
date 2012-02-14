@@ -87,9 +87,6 @@ def kickstart(ks, uploaded, path=settings.KS_DIR):
     ksparser = DecoratedKickstartParser(makeVersion())
     ksparser.readKickstart(ks)
     
-    # add the RIT stuff
-    ritPostContents = get_rit_post()
-    ksparser.addScript(ritPostContents, constants.KS_SCRIPT_POST)
     return ksparser
 
 
@@ -330,13 +327,3 @@ class DecoratedKickstartParser(KickstartParser):
         # add script object to self.handler.scripts
         scriptObj = Script(script, type=scriptType)
         self.handler.scripts.append(scriptObj)
-
-# add the rit post script for the rit remix into the scripts list
-
-def get_rit_post():
-    cwd = os.getcwd()
-    ritpostpath = cwd + "/ritpost.txt"
-    rfile = open(ritpostpath)
-    contents = rfile.read()
-    rfile.close()
-    return contents
