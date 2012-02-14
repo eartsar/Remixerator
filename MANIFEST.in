@@ -1,0 +1,9 @@
+include ChangeLog
+recursive-include tests *
+recursive-include dorrie *
+include README
+include COPYING
+include INSTALL
+global-exclude *.sqlite3
+global-exclude *.backup
+

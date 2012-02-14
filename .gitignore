@@ -7,3 +7,5 @@ dorrie/comps/media/cache
 *~
 dorrie/comps/old/
 *.ks
+*.egg*
+setup.py
